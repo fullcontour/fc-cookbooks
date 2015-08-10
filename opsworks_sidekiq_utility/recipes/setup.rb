@@ -1,12 +1,12 @@
 # Adapted from unicorn::rails: https://github.com/aws/opsworks-cookbooks/blob/master/unicorn/recipes/rails.rb
 
-include_recipe "opsworks_sidekiq::service"
+include_recipe "opsworks_sidekiq_utility::service"
 
 # setup sidekiq service per app
 node[:deploy].each do |application, deploy|
 
   if deploy[:application_type] != 'rails'
-    Chef::Log.debug("Skipping opsworks_sidekiq::setup application #{application} as it is not a Rails app")
+    Chef::Log.debug("Skipping opsworks_sidekiq_utility::setup application #{application} as it is not a Rails app")
     next
   end
 
