@@ -4,15 +4,9 @@ server {
   access_log  <%= node[:nginx][:log_dir] %>/<%= @application[:domains].first %>.access.log;
   
   location / {
-    <% if @application[:ssl_support] %>
-      # Rewrite everything to HTTPS. Except for the health_check.
-      if ($http_x_forwarded_proto != 'https') {
-        rewrite ^((?!/health_check).) https://$host$uri permanent;
-      }
-    <% else %>
-      root   <%= @application[:absolute_document_root] %>;
-      index  index.html index.htm index.php;
-    <% end %>
+    if ($http_x_forwarded_proto != 'https') {
+      rewrite ^((?!/health_check).) https://$host$request_uri? permanent;
+    }
   }
   
   # Block all svn access
