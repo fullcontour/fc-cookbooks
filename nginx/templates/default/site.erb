@@ -4,8 +4,9 @@ server {
   access_log  <%= node[:nginx][:log_dir] %>/<%= @application[:domains].first %>.access.log;
   
   location / {
-  if ($http_x_forwarded_proto != 'https') {
-      rewrite ^ https://$host$request_uri? permanent;
+    if ($http_x_forwarded_proto != 'https') {
+        rewrite ^ https://$host$request_uri? permanent;
+    }
   }
   
   # Block all svn access
