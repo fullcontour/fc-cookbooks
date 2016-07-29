@@ -1,2 +1,1 @@
-source "https://api.berkshelf.com"
-cookbook "newrelic"
+source 'https://supermarket.getchef.com'
